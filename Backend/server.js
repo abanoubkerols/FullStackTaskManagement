@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./src/config/db');
+const errorHandler = require('./src/utils/errorHandler');
 
 // Route files
 const authRoutes = require('./src/routes/authRoutes');
@@ -27,6 +28,9 @@ app.use('/api/tasks', taskRoutes);
 app.get('/api/health', (req, res) => {
   res.status(200).json({ success: true, message: 'API is running' });
 });
+
+// Error handler
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
