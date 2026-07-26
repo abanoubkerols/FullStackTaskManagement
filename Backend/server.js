@@ -5,6 +5,7 @@ const connectDB = require('./src/config/db');
 
 // Route files
 const authRoutes = require('./src/routes/authRoutes');
+const taskRoutes = require('./src/routes/taskRoutes');
 
 // Connect to database
 connectDB();
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
 
 
 // Health check
