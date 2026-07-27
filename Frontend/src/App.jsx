@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 
 function App() {
@@ -11,21 +13,19 @@ function App() {
           <Route
             path="/login"
             element={
-        
-                <h1>login</h1>
-            
+                <Login  />
             }
           />
           <Route
             path="/register"
             element={
-              <h1>register</h1>
+              <Register />
             }
           />
           <Route
             path="/"
             element={
-              
+
                 <h1>Dashboard</h1>
      
             }
