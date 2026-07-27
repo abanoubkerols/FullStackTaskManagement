@@ -9,7 +9,7 @@ import { useAuth } from './context/AuthContext';
 
 const PublicRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    if (loading) return <LoadingSpinner fullscreen/>; // You can create a LoadingSpinner component or use any loading indicator you prefer
+    if (loading) return <LoadingSpinner fullscreen/>;
     return user ? <Navigate to="/" replace /> : children;
 };
 
