@@ -2,13 +2,14 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import LoadingSpinner from './components/LoadingSpinner';
 import { useAuth } from './context/AuthContext';
 
 
 
 const PublicRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    if (loading) return <h1>Loading...</h1>;
+    if (loading) return <LoadingSpinner fullscreen/>; // You can create a LoadingSpinner component or use any loading indicator you prefer
     return user ? <Navigate to="/" replace /> : children;
 };
 
