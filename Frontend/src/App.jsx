@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 import LoadingSpinner from './components/LoadingSpinner';
 import { useAuth } from './context/AuthContext';
 
@@ -41,7 +42,7 @@ function App() {
                         path="/"
                         element={
 
-                            <h1>Dashboard</h1>
+                          <Dashboard/>
 
                         }
                     />
