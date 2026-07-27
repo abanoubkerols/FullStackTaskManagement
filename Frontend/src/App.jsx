@@ -6,11 +6,15 @@ import Dashboard from './pages/Dashboard';
 import LoadingSpinner from './components/LoadingSpinner';
 import { useAuth } from './context/AuthContext';
 
-
+const PrivateRoute = ({ children }) => {
+    const { user, loading } = useAuth();
+    if (loading) return <LoadingSpinner fullScreen />;
+    return user ? children : <Navigate to="/login" replace />;
+};
 
 const PublicRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    if (loading) return <LoadingSpinner fullscreen/>;
+    if (loading) return <LoadingSpinner fullscreen />;
     return user ? <Navigate to="/" replace /> : children;
 };
 
@@ -42,7 +46,9 @@ function App() {
                         path="/"
                         element={
 
-                          <Dashboard/>
+                            <PrivateRoute>
+                                <Dashboard />
+                            </PrivateRoute>
 
                         }
                     />
