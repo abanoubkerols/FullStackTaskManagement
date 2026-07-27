@@ -2,39 +2,53 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import { useAuth } from './context/AuthContext';
 
+
+
+const PublicRoute = ({ children }) => {
+    const { user, loading } = useAuth();
+    if (loading) return <h1>Loading...</h1>;
+    return user ? <Navigate to="/" replace /> : children;
+};
 
 function App() {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1">
-        <Routes>
-          <Route
-            path="/login"
-            element={
-                <Login  />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <Register />
-            }
-          />
-          <Route
-            path="/"
-            element={
+    return (
+        <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <main className="flex-1">
+                <Routes>
+                    <Route
+                        path="/login"
+                        element={
+                            <PublicRoute>
+                                <Login />
+                            </PublicRoute>
 
-                <h1>Dashboard</h1>
-     
-            }
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </main>
-    </div>
-  );
+                        }
+                    />
+                    <Route
+                        path="/register"
+                        element={
+
+                            <PublicRoute>
+                                <Register />
+                            </PublicRoute>
+                        }
+                    />
+                    <Route
+                        path="/"
+                        element={
+
+                            <h1>Dashboard</h1>
+
+                        }
+                    />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </main>
+        </div>
+    );
 }
 
 export default App;

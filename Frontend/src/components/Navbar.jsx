@@ -1,7 +1,15 @@
-import {Link} from 'react-router-dom';
+import { Link ,useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200">
@@ -12,12 +20,13 @@ const Navbar = () => {
           </Link>
 
           <div className="flex items-center gap-4">
-            {true ? (
+            {user ? (
               <>
                 <span className="text-sm text-gray-600 hidden sm:inline">
-                  Hi, <span className="font-medium text-gray-900"> Abanoub </span>
+                  Hi, <span className="font-medium text-gray-900"> {user.name} </span>
                 </span>
                 <button
+                  onClick={handleLogout}
                   className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                 >
                   Logout
